@@ -1,3 +1,5 @@
+package collections.utils;
+
 import gnu.trove.map.hash.THashMap;
 import gnu.trove.set.hash.THashSet;
 
@@ -51,6 +53,12 @@ public class Storage<T extends NestedObject> {
     public void printDetails() {
         stats.print();
         System.out.println();
+        printAllDetails();
+        System.out.println();
+        System.out.println("collections.utils.Storage - Total: " + HumanReadable.bytes(Generator.getSizeInMemory(this)));
+    }
+
+    private void printAllDetails() {
         printDetails(hashMap, hashMap.size());
         printDetails(thashMap, thashMap.size());
         printDetails(treeMap, treeMap.size());
@@ -59,13 +67,11 @@ public class Storage<T extends NestedObject> {
         printDetails(arrayList, arrayList.size());
         printDetails(arrayDeque, arrayDeque.size());
         printDetails(vector, vector.size());
-        System.out.println();
-        System.out.println("Storage - Total: " + HumanReadable.bytes(HashingUtils.getSizeInMemory(this)));
     }
 
     private void printDetails(Object collection, int size) {
         try {
-            double sizeCollection = HashingUtils.getSizeInMemory(collection);
+            double sizeCollection = Generator.getSizeInMemory(collection);
             double overheadCollection = sizeCollection - stats.getTotal();
             double percentualOverheadCollection = Math.round(overheadCollection / sizeCollection * 100);
             String lossEncountered = size == stats.getCountEach() ? "" : " ERROR( " + size + "!=" + stats.getCountEach() + ")";

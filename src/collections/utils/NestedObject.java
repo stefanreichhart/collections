@@ -1,3 +1,5 @@
+package collections.utils;
+
 import java.util.ArrayList;
 
 public class NestedObject {

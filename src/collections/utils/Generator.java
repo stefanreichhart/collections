@@ -1,13 +1,18 @@
+package collections.utils;
+
+import collections.runners.RunMemory;
 import org.github.jamm.MemoryMeter;
 
 import java.util.*;
 
-public class HashingUtils {
+public final class Generator {
 
     private static Random random = new Random();
     private static MemoryMeter meter = new MemoryMeter();
 
     private static String ALPHABETH = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+    private Generator() {}
 
     private static String generateString(int length) {
         if (length > 0) {
@@ -22,7 +27,7 @@ public class HashingUtils {
     }
 
     private static String generateString() {
-        return generateString(Hashing.MAX_STRING_LENGTH);
+        return generateString(RunMemory.MAX_STRING_LENGTH);
     }
 
     private static long generateId() {
@@ -30,11 +35,11 @@ public class HashingUtils {
     }
 
     private static NestedObject generateNestedObject(Storage store) {
-        return generateNestedObject(store, random.nextInt(Hashing.MAX_DEPTH));
+        return generateNestedObject(store, random.nextInt(RunMemory.MAX_DEPTH));
     }
 
     public static NestedObject createNestedObject(Storage store) {
-        return store.registerRoot(generateNestedObject(store, Hashing.MAX_DEPTH));
+        return store.registerRoot(generateNestedObject(store, RunMemory.MAX_DEPTH));
     }
 
     public static NestedObject createNestedObject(Storage store, int depth) {
@@ -47,7 +52,7 @@ public class HashingUtils {
         root.setName(generateString());
         store.add(root);
         if (depth > 0) {
-            for (int i = 0; i < random.nextInt(Hashing.MAX_CHILDREN); i++) {
+            for (int i = 0; i < random.nextInt(RunMemory.MAX_CHILDREN); i++) {
                 root.addChild(generateNestedObject(store, --depth));
             }
         }

@@ -1,3 +1,5 @@
+package collections.utils;
+
 public class Statistics<T extends NestedObject> {
 
     private long countRoot = 0;
@@ -7,7 +9,7 @@ public class Statistics<T extends NestedObject> {
 
     public T addRoot(T nestedObject) {
         synchronized (Statistics.class) {
-            long sizeInMemory = HashingUtils.getSizeInMemory(nestedObject);
+            long sizeInMemory = Generator.getSizeInMemory(nestedObject);
             total += sizeInMemory;
             countRoot++;
             avg = total / countRoot;
@@ -47,4 +49,5 @@ public class Statistics<T extends NestedObject> {
             return total;
         }
     }
+
 }

@@ -1,6 +1,10 @@
-public class HumanReadable {
+package collections.utils;
+
+public final class HumanReadable {
 
     private static int NORMALIZATION = 1000;
+
+    private HumanReadable() {}
 
     public static String bytes(double bytes) {
         double kb = bytes / NORMALIZATION;
@@ -19,6 +23,15 @@ public class HumanReadable {
         } else {
             return bytes + " bytes";
         }
-        //return bytes + " bytes";
     }
+
+
+    public static String padRight(String name) {
+        return String.format("%-12s", name);
+    }
+
+    public static String padLeft(String name) {
+        return String.format("%12s", name);
+    }
+
 }
